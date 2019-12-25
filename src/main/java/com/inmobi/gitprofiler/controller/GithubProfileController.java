@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.inmobi.gitprofiler.model.GithubProfile;
+import com.inmobi.gitprofiler.service.ProfileHistoryService;
 import com.inmobi.gitprofiler.service.ProfileSearchService;
 
 /**
@@ -21,21 +22,41 @@ import com.inmobi.gitprofiler.service.ProfileSearchService;
  */
 @Controller
 public class GithubProfileController {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(GithubProfileController.class);
-	
+
 	@Autowired
 	private ProfileSearchService searchService;
-	
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String search(@RequestParam(value = "search", required = false) String gitHandle, Model model) throws IOException { 	
-        LOG.info("Searching profiles for : {}",gitHandle);
-    	final List<GithubProfile> searchResults = searchService.getProfiles(gitHandle);
-        model.addAttribute("search", searchResults);
-                
-        return "index";
-    }
-    
-    
+
+	@Autowired
+	private ProfileHistoryService profileSearchHistory;
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(@RequestParam(value = "q", required = false) String gitHandle, Model model)
+			throws IOException {
+		// Search profiles
+		LOG.info("Searching profiles for : {}", gitHandle);
+		final List<GithubProfile> searchResults = searchService.getProfiles(gitHandle);
+		model.addAttribute("search", searchResults);
+
+		// Save search history
+		LOG.info("Saving search results...");
+		profileSearchHistory.saveOrUpdate(searchResults);
+		model.addAttribute("history", profileSearchHistory.getSearchHistory());
+
+		return "index";
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String deleteHistory(@RequestParam(value = "id", required = true) int id, Model model) {
+		//Delete record from DB
+		LOG.info("Deleting record with id : {}", id);
+		profileSearchHistory.delete(id);
+		
+		//Load fresh history
+		model.addAttribute("history", profileSearchHistory.getSearchHistory());
+		
+		return "index";
+	}
 
 }

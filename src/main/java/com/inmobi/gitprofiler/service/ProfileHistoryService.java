@@ -23,6 +23,10 @@ public interface ProfileHistoryService {
 	
 	GithubProfile getProfileHistory(int profileId);
 	
+	void saveOrUpdate(GithubProfile profile);
+	
+	void saveOrUpdate(List<GithubProfile> profiles);
+	
 	void delete(int profileId);
 
 }

@@ -77,7 +77,8 @@ public class ProfileSearchImpl implements ProfileSearchService {
 				profiles.add(userProfile);
 			}
 		}
-		LOG.info("Profiles found with handle {} -> {}", gitHandle, profiles);
+		if(LOG.isDebugEnabled())
+			LOG.debug("Profiles found with handle {} -> {}", gitHandle, profiles);
 		return profiles;
 	}
 

@@ -1,5 +1,7 @@
 package com.inmobi.gitprofiler.model;
 
+import java.util.Comparator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +10,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class GithubProfile {
+public class GithubProfile implements Comparator<GithubProfile> {
 	
 	@Id
 	@GeneratedValue
@@ -109,11 +111,18 @@ public class GithubProfile {
 	public void setFollowing(long following) {
 		this.following = following;
 	}
+	
+	@Override
+	public int compare(GithubProfile o1, GithubProfile o2) {
+		return o1.id - o2.id;
+	}
 
 	@Override
 	public String toString() {
 		return "GitHandle: " + handle + ", Email: " + email + ", Name: " + name + ", Location: " + location + ", Company: "
 				+ company + ", Followers: " + followers + ", Following: " + following;
 	}
+
+	
 
 }
