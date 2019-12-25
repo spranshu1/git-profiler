@@ -1,1 +1,1 @@
-# git-profiler
+# github-profiler
