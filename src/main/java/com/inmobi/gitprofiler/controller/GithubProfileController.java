@@ -31,22 +31,35 @@ public class GithubProfileController {
 	@Autowired
 	private ProfileHistoryService profileSearchHistory;
 
+	/**
+	 * Search github users based on search query
+	 * @param gitHandle the user handle to search
+	 * @param model the model to return
+	 * @return Redirect page
+	 * @throws IOException the exception
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(@RequestParam(value = "q", required = false) String gitHandle, Model model)
 			throws IOException {
 		// Search profiles
-		LOG.info("Searching profiles for : {}", gitHandle);
+		LOG.debug("Searching profiles for : {}", gitHandle);
 		final List<GithubProfile> searchResults = searchService.getProfiles(gitHandle);
 		model.addAttribute("search", searchResults);
 
 		// Save search history
-		LOG.info("Saving search results...");
+		LOG.debug("Saving search results...");
 		profileSearchHistory.saveOrUpdate(searchResults);
 		model.addAttribute("history", profileSearchHistory.getSearchHistory());
 
 		return "index";
 	}
 
+	/**
+	 * Deletes the search history from data store
+	 * @param id id of record to delete
+	 * @param model the model to return
+	 * @return Redirect page
+	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteHistory(@RequestParam(value = "id", required = true) int id, Model model) {
 		//Delete record from DB

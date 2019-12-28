@@ -27,6 +27,12 @@
 	</properties>
 
 	<dependencies>
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 		<!-- OAuth -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,7 +54,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		
+
 		<!-- Spring Data JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -68,12 +74,7 @@
 			<artifactId>github-api</artifactId>
 			<version>${github.api.version}</version>
 		</dependency>
-
-		<!-- Devtools -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
+		
 	</dependencies>
 
 	<build>

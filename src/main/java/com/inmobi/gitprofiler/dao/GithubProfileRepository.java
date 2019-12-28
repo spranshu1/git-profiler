@@ -8,6 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.inmobi.gitprofiler.model.GithubProfile;
 
+/**
+ * 
+ * @author pranshu.shrivastava
+ *
+ */
 public interface GithubProfileRepository extends CrudRepository<GithubProfile, Integer> {
 
 }
