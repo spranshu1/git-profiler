@@ -8,7 +8,7 @@
 
 ## Summary ##
 
-API Application built to search user profiles from Github based on their git handle
+Application built to search user profiles from Github based on their git handle
 
 App is built with Java, Spring as a standalone Springboot application.
 

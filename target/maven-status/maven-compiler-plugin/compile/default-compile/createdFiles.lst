@@ -1,8 +1,11 @@
 com\inmobi\gitprofiler\controller\GithubProfileController.class
 com\inmobi\gitprofiler\service\ProfileHistoryServiceImpl.class
+com\inmobi\gitprofiler\config\GithubConfig.class
 com\inmobi\gitprofiler\service\ProfileSearchImpl.class
 com\inmobi\gitprofiler\model\GithubProfile.class
 com\inmobi\gitprofiler\dao\GithubProfileRepository.class
+com\inmobi\gitprofiler\config\SecurityConfig.class
 com\inmobi\gitprofiler\service\ProfileHistoryService.class
 com\inmobi\gitprofiler\service\ProfileSearchService.class
 com\inmobi\gitprofiler\Application.class
+com\inmobi\gitprofiler\util\AuthUtil.class
