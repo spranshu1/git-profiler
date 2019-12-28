@@ -67,14 +67,17 @@ public class ProfileSearchImpl implements ProfileSearchService {
 														.withPageSize(10);
 			PagedIterator<GHUser> userIterator = allUsers.iterator();
 			// Currently only 10 records, can be modified to implement proper pagination
-			for (GHUser user : userIterator.nextPage()) {
-				GithubProfile userProfile = new GithubProfile(user.getLogin(), user.getName(), user.getEmail());
-				userProfile.setBlog(user.getBlog());
-				userProfile.setCompany(user.getCompany());
-				userProfile.setFollowers(user.getFollowersCount());
-				userProfile.setFollowing(user.getFollowingCount());
-
-				profiles.add(userProfile);
+			
+			if(userIterator.hasNext()) {				
+				for (GHUser user : userIterator.nextPage()) {
+					GithubProfile userProfile = new GithubProfile(user.getLogin(), user.getName(), user.getEmail());
+					userProfile.setBlog(user.getBlog());
+					userProfile.setCompany(user.getCompany());
+					userProfile.setFollowers(user.getFollowersCount());
+					userProfile.setFollowing(user.getFollowingCount());
+	
+					profiles.add(userProfile);
+				}
 			}
 		}
 		if(LOG.isDebugEnabled())

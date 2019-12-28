@@ -36,7 +36,7 @@ public class AuthUtil {
 										.loadAuthorizedClient(oauthToken.getAuthorizedClientRegistrationId(), oauthToken.getName());
 		final String token = client.getAccessToken().getTokenValue();
 		
-		LOG.info("Auth Token : {}",token);
+		LOG.debug("Auth Token : {}",token);
 		return token;
 	}
 
